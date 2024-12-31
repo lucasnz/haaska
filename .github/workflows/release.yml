@@ -37,7 +37,7 @@ jobs:
           cd build && zip ../haaska.zip -r *
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: haaska.zip
           path: haaska.zip
