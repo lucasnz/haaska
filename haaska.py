@@ -59,7 +59,7 @@ class HomeAssistant(object):
     def post(self, endpoint, data, wait=False):
         read_timeout = None if wait else 0.01
         try:
-            logger.debug(f'calling {endpoint} with {data}')
+            logger.debug(f'calling {self.build_url(endpoint)} with {data}')
             r = self.session.post(self.build_url(endpoint),
                                   data=json.dumps(data),
                                   timeout=(None, read_timeout))
@@ -99,7 +99,7 @@ class Configuration(object):
         if not url:
             raise ValueError('Property "url" is missing in config')
 
-        return url.replace("/api", "").rstrip("/")
+        return url.removesuffix("/api").removesuffix("/")
 
 
 def event_handler(event, context):
