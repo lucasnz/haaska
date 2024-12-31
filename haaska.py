@@ -108,6 +108,7 @@ class Configuration(object):
 
         return self.get_base_url(url)
 
+
 def event_handler(event, context):
     config = Configuration('config.json')
     if config.debug:

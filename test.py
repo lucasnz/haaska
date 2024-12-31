@@ -11,7 +11,7 @@ def configuration():
         "bearer_token": "",
         "debug": False,
         "ssl_verify": True,
-        "ssl_client": []
+        "ssl_client": null
     })
 
 
