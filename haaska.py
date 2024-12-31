@@ -100,14 +100,13 @@ class Configuration(object):
             netloc = rest.split("/", 1)[0]
             return f"{scheme}://{netloc}"
         return url
-    
+
     def get_url(self, url):
         """Returns Home Assistant base url without '/api' or trailing slash"""
         if not url:
             raise ValueError('Property "url" is missing in config')
 
-        return get_base_url(url)
-
+        return self.get_base_url(url)
 
 def event_handler(event, context):
     config = Configuration('config.json')
