@@ -94,7 +94,7 @@ class Configuration(object):
                 return self._json[key]
         return default
 
-    def get_base_url(self url):
+    def get_base_url(self, url):
         if "://" in url:
             scheme, rest = url.split("://", 1)
             netloc = rest.split("/", 1)[0]
