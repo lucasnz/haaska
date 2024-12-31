@@ -59,7 +59,7 @@ class HomeAssistant(object):
     def post(self, endpoint, data, wait=False):
         read_timeout = None if wait else 0.01
         try:
-            logger.debug(f'calling {endpoint} with {data}')
+            logger.debug(f'calling {self.build_url(endpoint)} with {data}')
             r = self.session.post(self.build_url(endpoint),
                                   data=json.dumps(data),
                                   timeout=(None, read_timeout))
@@ -94,12 +94,19 @@ class Configuration(object):
                 return self._json[key]
         return default
 
+    def get_base_url(self, url):
+        if "://" in url:
+            scheme, rest = url.split("://", 1)
+            netloc = rest.split("/", 1)[0]
+            return f"{scheme}://{netloc}"
+        return url
+
     def get_url(self, url):
         """Returns Home Assistant base url without '/api' or trailing slash"""
         if not url:
             raise ValueError('Property "url" is missing in config')
 
-        return url.replace("/api", "").rstrip("/")
+        return self.get_base_url(url)
 
 
 def event_handler(event, context):

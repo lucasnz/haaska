@@ -98,6 +98,7 @@ ENV/
 /site
 
 config/*
+!config/config.json.sample
 build
 .DS_Store
 haaska.zip
